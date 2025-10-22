@@ -1,435 +1,301 @@
-@charset "utf-8";
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; line-height: 1.6; }
 
-.video-wrapper {
-	width: 100%;
-	height: 100%;
-	position: relative;
-	overflow: hidden;
+    /* --- 導覽列 --- */
+    header {
+      position: fixed; top: 0; left: 0; width: 100%;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.5rem 1rem; background: rgba(20,6,79,0.8);
+      z-index: 1000; backdrop-filter: blur(20px);
+    }
+    header .logo { font-size: 1.5rem; font-weight: bold; color: #fff; }
+	    /* Logo */
+    .logo {
+      display: flex; align-items: center;
+      color: #fff; font-weight: bold;
+      text-decoration: none; font-size: 1.2rem;
+    }
+    .logo img { height: 80px; margin-right: 0.5rem; }
+/*	nav {
+      width: 100%;
+	  background: rgba(20,6,79,0.7);
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+    } */
+    nav ul { list-style: none; display: flex; }
+    nav ul li { position: relative; }
+    nav ul li a {
+      display: block; padding: 10px 20px; color: #fff; text-decoration: none;
+    }
+    nav ul li a:hover { background: rgba(25,55,155,0); color:#ffd745; }
+
+    /* 下拉選單 (桌機版 hover) */
+    nav ul ul {
+      position: absolute; top: 100%; left: 0;
+      background: rgba(0,6,79,0.9); 
+      display: none; flex-direction: column; min-width: 180px;
+	  border-radius: 6px;
+	  z-index: 99;
+    }
+    nav ul li:hover > ul { display: flex; }
+    nav ul ul li a { padding: 10px; }
+
+    /* 漢堡選單按鈕 */
+    .menu-toggle {
+      display: none; flex-direction: column; cursor: pointer;
+    }
+    .menu-toggle div {
+      width: 25px; height: 3px; background: #fff; margin: 4px 0;
+      transition: all 0.3s ease;
+    }
+
+   /* --- Pattern sections --- */
+    .panel {
+      padding: 6rem 1rem;
+      text-align: center;
+	  background: rgba(0, 0, 0, 0.2);
+    }
+	.panel .content {
+		position: relative;
+		left: 60px;
+		width: 85%;
+		z-index: 2;
+		color: #fff;
+		text-align: center ;
+		padding: 2rem;
+		margin: 10px 20px 10px 20px;
+	/*	background: rgba(0, 0, 0, 0.4);*/
+		border-radius: 12px;
+	}
+	
+	.panel table{
+		width:70%;
+		padding: 10px;
+		border: 4px solid;
+		border-radius: 10px;
+		margin: 10px 30px 20px 10px;
+		text-align: center;
+		line-height: 50px;
+	}
+	.panel td{
+		vertical-align: top;
+		height:60px;
+	}
+	
+    .pattern-1 {
+  /*    background: repeating-linear-gradient(
+        45deg, #f5f5  f5, #f5f5f5 20px, #e0e0e0 20px, #e0e0e0 40px
+      );*/
+		background-image: url("imgs/acc_building.jpg");
+		background-size: cover; /* Scales the image to cover the entire viewport */
+		background-position: center center; /* Centers the image horizontally and vertically */
+		background-repeat: no-repeat; /* Prevents the image from repeating */
+		background-attachment: fixed; /* Keeps the background image fixed while scrolling content */
+		margin: 0; /* Removes default body margin, preventing whitespace */
+		height: 100vh; /* Ensures the body takes up the full viewport height */
+		color: #ffffff;
+	/*	opacity: 0.5; /* 50% transparency */
+    }
+    .pattern-2 {
+      background: repeating-linear-gradient(
+        -45deg, #fafafa, #fafafa 25px, #ddd 25px, #ddd 50px
+      );
+	}
+	
+	h3{	padding: 20px 25px 15px 10px;	}
+			
+	.p2{ padding:5px 20px 5px 30px; line-height:40px; }
+	
+	p{ text-align:justify; font-size:larger;}
+
+ /* --- Section 1 (影片背景) --- */
+    .hero {
+      position: relative; height: 100vh; width: 100%; overflow: hidden;
+      display: flex; justify-content: center; align-items: center;
+    }
+    .hero video {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      object-fit: cover; z-index: -1;
+    }
+	
+    .hero .content {
+      color: #fff; text-align: center; background: rgba(0,0,0,0.4);
+      padding: 40px; border-radius: 10px; width:75%; margin-top: -2rem;
+	  left:20px;  /*  有特別聚會時增加  */
+	  position: absolute;   /* 有特別聚會時改成 absolute ; 平常是 relative */
+    }
+
+    /* 手機 / 平板樣式 */
+    @media (max-width: 768px) {
+      nav {
+        position: absolute; top: 60px; right: 0;
+        width: 220px; background: rgba(0,0,0,0.95);
+        max-height: 0; overflow: hidden;
+        transition: max-height 0.3s ease-out;
+      }
+      nav.active { max-height: 500px; } /* 展開效果 */
+
+      nav ul {
+        flex-direction: column; width: 100%;
+      }
+      nav ul li { border-bottom: 1px solid rgba(255,255,255,0.1); }
+      nav ul li a { padding: 12px 16px; }
+
+      /* 手機版下拉選單：預設隱藏 */
+      nav ul ul {
+        position: static;
+        display: none;
+        background: rgba(0,0,0,0.8);
+      }
+      nav ul li.active > ul {
+        display: flex;
+      }
+
+      .menu-toggle { display: flex; }
+	  
+	  .hero .content{ width:98%; text-align:justify; margin-top:5rem; padding:10px; color:white; border-radius: 10px; }
+	  
+	  h1 { text-align: center; }
+	  
+	  .p2{ padding:5px 20px 5px 30px; line-height:40px; line-align: center; font-size:larger;}
+	 
+	 .panel .content {
+		position: relative;
+		left: 0px;
+		width: 95%;
+		z-index: 2;
+		color: #fff;
+		text-align: center ;
+		padding: 2rem;
+		margin: 10px;
+	/*	background: rgba(0, 0, 0, 0.4);*/
+		border-radius: 12px;
+	}
+	 
+	 .panel table{
+		width:100%; padding: 5px; border: 4px solid; border-radius: 10px;
+		margin: 10px; text-align: center; line-height: 20px;
+	}
+	.panel td{
+		vertical-align: top; height:60px;
+	}
+	  
+	  
+    } /*   結束手機板  */
+
+	.panel table{
+		width:100%; padding: 5px; border: 4px solid; border-radius: 10px;
+		margin: 10px; text-align: center; line-height: 20px;
+	}
+	.panel td{
+		vertical-align: top; height:60px;
+	}
+
+    /* --- Section 2 (卡片區) --- */
+    .section {
+      background: url('https://picsum.photos/1920/1080?blur=3') no-repeat center center/cover;
+      padding: 100px 20px; display: flex; justify-content: center;
+      gap: 30px; flex-wrap: wrap;
+    }
+    .card {
+	  text-align: center;
+      background: #fff; width: 350px; padding: 20px;
+      border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      opacity: 0; transform: translateY(50px);
+	  
+	  text-decoration: none;
+    }
+    .card.show {
+      animation: slideUp 1s forwards;
+    }
+	.card p {text-align:justify; text-decoration: none; }
+	
+	.clink {color: white; background-color: transparent; text-decoration: none; }
+	.clink_w {color: white; background-color: transparent; text-decoration: none; }
+	
+/*	a:visited {color: black; background-color: transparent; text-decoration: none; }
+*/	
+	
+    @keyframes slideUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .card img { max-width: 100%; border-radius: 10px; }
+    .card h3 { margin: 15px 0 10px; }
+    .card p { color: #333; }
+	
+	footer{
+		background: -webkit-linear-gradient(top, rgba(26,6,79,0.5), rgba(13,7,41,1));
+		/*background: -moz-linear-gradient(top, #000, #40205f);
+		
+		/*background: linear-gradient(top, rgba(26,6,79,0), rgba(134,98,227,1));
+		/*background: rgba(64, 32, 95, 0.5);*/
+	/*	opacity: 0.57;*/
+		color: white !important;
+		height: 80px
+		padding: 2em;
+		text-align: center;
+		align-items: center;
+		justify-content: center;
+	}
+	
+	footer p{
+	margin-top: 0.975em; font-size: 0.9em; color: white; text-align:center;
+}
+/*  移動式方框   */
+.draggable-box {
+  width: 150px;
+  height: auto;
+  background: rgba(0, 123, 255, 0.8);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  border-radius: 10px;
+  cursor: move;
+  user-select: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: box-shadow 0.2s;
 }
 
-#backVideo {
-	width: 100% !important;
-	height: auto !important;
-	border: 0.4rem ridge black;
+.draggable-box:active {
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
 }
 
-.video-content {
-	/* background: rgba(12, 13, 17, 0.45); */
-	background-color: rgba(30, 2, 72, 0.25);
-	position: absolute;
-	max-width: 100%;
-	top: -8px;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	z-index: 1;
-}
+  /* 浮動方框 */
+  .floating-box {
+    position: fixed;       /* 固定在畫面上 */
+    top:115px;
+	/*bottom: 20px;          /* 距離底部 20px */
+    right: 10px;           /* 距離右邊 20px */
+    background: rgba(60,60,60,0.7);  /* 半透明黑底 */
+    color: #fff;
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    width: 20%;
+	height: auto;
+    z-index: 88;         /* 確保在最上層 */
+    transition: opacity 0.5s ease;
+	animation: slideUp 3s forwards;
 
-.intro {
-	position: absolute;
-	left: 5%;
-	top: 15%;
-	width: 45%;
-}
+  }
 
-.cellintro{
-	display: none;
-}
+  /* 可選：滑鼠移入特效 */
+  .floating-box:hover {
+    background: rgba(70,70,180,1);
+  }
 
-.intro>p span {
-	color: white;
-	font-family: 'Montserrat', sans-serif;
-	line-height: 1.7;
-	text-align: left;
-	display: block;
-	font-size: 1.2em;
-	padding-left: 1em;
-}
-
-#videoBtn {
-	position: absolute;
-	top: 15%;
-	width: 1%;
-	font-size: 1.2rem;
-	padding: 0.6rem 1.4rem 0.6rem 0.6rem;
-	border: none;
-	background: rgba(12, 13, 17, 0.3);
-	color: #fff;
-	cursor: pointer;
-	border-radius: 0 5px 5px 0;
-}
-
-#videoBtn:hover {
-	color: mediumpurple;
-}
-
-/* slideshow ----------------------------------------------------------------------*/
-.slideshow {
-	float: right;
-	margin-top: 5%;
-	width: 50%;
-	height: 75%;
-	display: flex;
-	flex-direction: row;
-	background-color: rgba(12, 13, 17, 0);
-	border: 0.5em solid rgba(0, 0, 0, 0);
-}
-
-.slideshow-items {
-	position: relative;
-	width: 100%;
-
-}
-
-.item {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-}
-
-.item-image {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	object-fit: contain;
-	opacity: 0;
-	/* display: block; */
-	/* transition: property name | duration | timing-function | delay  */
-	transition: opacity .3s ease-out .45s;
-}
-
-.item.active .item-image {
-	opacity: 1;
-	pointer-events: auto;
-}
-
-/* Controls ----------------------------------------------------------------------*/
-.controls {
-	position: relative;
-	float: right;
-	padding-right: 0rem;
-	margin-left: 0%;
-	margin-top: 1rem;
-	z-index: 1000;
-}
-
-.controls ul {
-	list-style: none;
-}
-
-.controls ul li {
-	/* display: inline-block; */
-	width: 12px;
-	height: 12px;
-	margin: 6px;
-	background: #40205f;
-	cursor: pointer;
-}
-
-.controls ul li.active {
-	/* background: mediumpurple; */
-	background-color:rgba(12, 13, 17, 0);
-}
-
-
-/* First Visit ----------------------------------------------------------------------*/
-.first-visit-title {
-	text-align: center;
-	margin-left: 12%;
-	margin-right: 12%;
-}
-
-.notices {
-	text-align: center;
-	margin-left: 12%;
-	margin-right: 12%;
-}
-
-.visitor-ul {
-	position: relative;
-	display: flex;
-	text-align: center;
-	padding: 1% 8%;
-}
-
-.tv-ul {
-	position: relative;
-	display: flex;
-	text-align: center;
-	padding: 1% 14%;
-}
-
-.visitor-li {
-	display: flex;
-	flex: 1;
-	justify-content: center;
-}
-
-.linewrapper {
-	position: relative;
-	width: 100%
-}
-
-.notebook-icon::before {
-	content: url("../img/notebook.svg");
-	width: 10px;
-	height: 10px;
-	opacity: 0.9;
-	box-sizing: border-box;
-}
-
-.register-icon::before {
-	content: url("../img/register.svg");
-	background-size: 60px 60px;
-	opacity: 0.9;
-	box-sizing: border-box;
-}
-
-.church-icon::before {
-	content: url("../img/church.svg");
-	background-size: 60px 60px;
-	opacity: 0.9;
-	box-sizing: border-box;
-}
-
-.group-icon::before {
-	content: url("../img/group.svg");
-	background-size: 60px 60px;
-	opacity: 0.9;
-	box-sizing: border-box;
-}
-
-.visitor-icon::after {
-	position: absolute;
-	top: 2em;
-	width: calc(100% - 8.25em);
-	left: calc(50% + 4.5em);
-	border-top: 0.15em solid #5F178D;
-	content: "";
-	box-sizing: border-box;
-}
-
-.tv-icon{
-	content: url("../img/tv.svg");
-	width: 60px;
-	height: 60px;
-	opacity: 0.9;
-	box-sizing: border-box;
-}
-
-.chalk-icon{
-	content: url("../img/chalkboard.svg");
-	width: 60px;
-	height: 60px;
-	opacity: 0.9;
-	box-sizing: border-box;
-}
-
-.visitor-content {
-	display: flex;
-	flex-direction: column;
-}
-
-.visitor-content h3 {
-	opacity: 0.9;
-}
-
-.visitor-content p {
-	font-size: 1em;
-	padding: 2% 0;
-}
-
-.visitor-content a {
-	font-size: .75rem;
-	font-weight: 400;
-	padding: 0.25rem;
-	margin: 0 30%;
-	color: #fff;
-	background-color: #5F178D;
-	border-radius: 5px;
-}
-
-.visitor-content a:hover {
-	background-color: black;
-	color: mediumpurple;
-}
-
-
-/* .sunday-worship-intro {
-	display: flex;
-	margin-left: 13%;
-	margin-right: 10%;
-} */
-.sunday-worship-intro {
-	display: flex;
-	margin-left: 15%;
-	margin-right: 15%;
-}
-
-#lunch-reserve {
-	margin-top: 6%;
-	margin-left: 10%;
-	margin-right: 15%;
-	padding: 0.5rem 0.75rem;
-	background-color: rgba(64, 32, 95, .1);
-	border: 0.25em solid #40205f;
-	border-radius: 10px;
-}
-
-#lunch-reserve:hover {
-	background-color: #40205f;
-	color: white;
-}
-
-/* Sunday Schedule -----------------------------------------------------------*/
-.sunday-schedul-l {
-	display: flex;
-}
-
-.sunday-schedule {
-	display: block;
-	flex-direction: column;
-	flex: 1;
-	padding: 2em 3em;
-	margin: 0 0.5em;
-	overflow: hidden;
-	/* background-color: #f7faff; */
-	background-color: #f0f1fa;
-	border-radius: 10px;
-}
-
-.sunday-timeline {
-	width: 100%;
-	position: relative;
-	padding: 1.5rem 0 1rem;
-
-}
-
-.sunday-timeline::before {
-	content: '';
-	position: absolute;
-	top: 0;
-	left: calc(18% + 0.5em);
-	height: 100%;
-	width: 0.25em;
-	background: #D1D4D7;
-	border-radius: 0.25rem;
-	box-sizing: border-box;
-}
-
-.timeline-element {
-	position: relative;
-	margin: 1em 0 1em;
-}
-
-.timeline-element-time {
-	position: absolute;
-	left: calc(18% - 5em);
-	top: 0.1em;
-	/* color: #adb5bd; */
-	color: darkgray;
-	font-size: 0.875em;
-	white-space: nowrap;
-}
-
-.badge {
-	position: absolute;
-	left: 18%;
-	border-radius: 0.3125rem;
-	background-color: #71869d;
-}
-
-.badge-dot {
-	width: 18px;
-	height: 18px;
-	position: absolute;
-}
-
-.badge-dot::before {
-	content: '';
-	width: 10px;
-	height: 10px;
-	border-radius: 0.25rem;
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	margin: -5px 0 0 -5px;
-	background: #fff;
-	box-sizing: border-box;
-}
-
-.timeline-element-content {
-	position: relative;
-	margin-left: calc(18% + 2em);
-	top: -0.1em;
-	margin-bottom: 2em;
-	opacity: 0.7;
-}
-
-.timeline-element-content p {
-	font-size: 0.875em;
-	margin-top: 0.2em;
-}
-
-.pray-intro {
-	display: flex;
-	width: 100%;
-	background-color: #40205f;
-	padding-top: 2em;
-	padding-bottom: 2em;
-	padding-left: 12%;
-	padding-right: 12%;
-	color: white;
-}
-
-.pray-reserve {
-	margin-top: calc(1% + 0.5em);
-	margin-left: 25%;
-	padding: 1em;
-	background-color: rgba(64, 32, 95, .1);
-	border: 0.25em solid white;
-	border-radius: 10px;
-	color: white;
-}
-
-.notice-l {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-}
-
-.notice-content {
-	width: 48%;
-	margin: 1% 1% 0 1%;
-	background-color: #f0f1fa;
-	border-radius: 10px;
-	padding-bottom: 3%;
-}
-
-.notice-content>h3 {
-	padding: 1rem;
-	font-size: 1.4rem;
-}
-
-.notice-placeholder {
-	height: 18em;
-}
-
-.notice-placeholder img {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	object-fit: contain;
-}
-
-.colored-header {
-	display: flex;
-	width: 100%;
-	padding: 0.5rem;
-	background-color: #40205f;
-	color: white;
-	text-align: center;
-	justify-content: center;
-	opacity: 0.97;
-}
+  /* 手機板調整 */
+  @media (max-width: 768px) {
+    .floating-box {
+      bottom: 10px;
+      right: 10px;
+      width: 160px;
+      padding: 15px;
+      font-size: 0.9rem;
+	  
+    }
+  }
